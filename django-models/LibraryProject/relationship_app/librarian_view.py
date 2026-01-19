@@ -2,8 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import TemplateView
 
 def is_librarian(user):
-    """Function to check if a user has the 'Librarian' role."""
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+    """Function to check if a user has the 'Librarians' role."""
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarians'
 
 class LibrarianView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     """
