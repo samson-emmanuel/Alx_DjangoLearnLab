@@ -1,4 +1,2 @@
-book = Book.objects.get(title= "1984")
-book = “Nineteen Eighty-Four”
-book.save()
-book.title
+Update the title
+book.title = "Nineteen Eighty-Four" book.save() book # Expected output: <Book: Nineteen Eighty-Four>
