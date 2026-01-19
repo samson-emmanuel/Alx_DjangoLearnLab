@@ -3,7 +3,11 @@ from django.views.generic import TemplateView
 
 def is_librarian(user):
     """Function to check if a user has the 'Librarians' role."""
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarians'
+    from .models import UserProfile
+    try:
+        return user.is_authenticated and user.userprofile.role == 'Librarians'
+    except UserProfile.DoesNotExist:
+        return False
 
 class LibrarianView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     """

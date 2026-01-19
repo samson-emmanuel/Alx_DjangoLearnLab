@@ -14,8 +14,9 @@ class LibrarianRegistrationForm(UserCreationForm):
         user = super().save(commit=False)
         if commit:
             user.save()
-            # The signal will create a UserProfile with a default role.
-            # We need to update it with the role from the form.
-            user.userprofile.role = self.cleaned_data['role']
-            user.userprofile.save()
+            # Create or update the UserProfile
+            profile, created = UserProfile.objects.update_or_create(
+                user=user,
+                defaults={'role': self.cleaned_data.get('role', 'Member')}
+            )
         return user
